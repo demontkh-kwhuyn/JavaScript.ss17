@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="Nhập tên của bạn" id="nameInput" />
+        <button id="buttonSave">Lưu Tên</button>
+        <p id="greeting">Chưa có ai</p>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const saveBtn = document.getElementById('buttonSave');
+        const greeting = document.getElementById('greeting');
+
+        const displayGreeting = (name) =>{
+            if(name){
+                greeting.innerText = `Xin chào , ${name} !`;
+
+            }else{
+                greeting.innerText = "Chưa có name";
+            }
+        };
+        window.onload = () =>{
+            const savedName = localStorage.getItem("userName");
+            displayGreeting(savedName);
+        };
+
+        buttonSave.onclick = ()=>{
+            const name = nameInput.value.trim();
+            if(name){
+                localStorage.setItem("userName",name);
+                displayGreeting(name);
+                nameInput.value = "";
+
+            }else{
+                alert("Nhập tên!!")
+            }
+
+        };
+        
+        
+    </script>
+</body>
+</html>

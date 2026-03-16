@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lưu nháp nội dung</title>
+</head>
+<body>
+
+    <h2>Viết gì đó...</h2>
+    <div>
+    <textarea id="draft-area" rows="10" cols="60" placeholder="Nội dung sẽ tự động được lưu..."></textarea>
+    </div>
+    <div>
+    <button id="clear-btn">Xóa nháp</button>
+    </div>
+
+    <script>
+        const textArea = document.getElementById('draft-area');
+        const clearBtn = document.getElementById('clear-btn');
+
+        const savedDraft = localStorage.getItem('draft');
+        if (savedDraft) {
+            textArea.value = savedDraft;
+        }
+
+        textArea.addEventListener('input', () => {
+            localStorage.setItem('draft', textArea.value);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            localStorage.removeItem('draft');
+            textArea.value = '';
+        });
+    </script>
+</body>
+</html>

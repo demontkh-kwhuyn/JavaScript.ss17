@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="access">Bạn đã truy cập trang này X lần </p>
+    <script>
+        const display = document.getElementById(`access`);
+        let count = localStorage.getItem("access") || "0";
+        count = Number(count) + 1;
+        localStorage.setItem("access",count);
+        display.innerText = `Bạn đã Truy Cập trang này ${count} lần! `;
+    </script>
+</body>
+</html>
+3.4.5.7.8

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xóa thông tin cá nhân</title>
+</head>
+<body>
+
+    <div class="form-group">
+        <input type="text" id="name" placeholder="Họ và tên">
+    </div>
+    <div class="form-group">
+        <input type="number" id="age" placeholder="Tuổi">
+    </div>
+    
+    <button id="save-btn">Lưu thông tin</button>
+    <button id="delete-btn">Xóa hồ sơ</button>
+
+    <div id="display-area"></div>
+
+    <script>
+        const nameInput = document.getElementById('name');
+        const ageInput = document.getElementById('age');
+        const saveBtn = document.getElementById('save-btn');
+        const deleteBtn = document.getElementById('delete-btn');
+        const displayArea = document.getElementById('display-area');
+
+        const showData = (data) => {
+            displayArea.innerText = data 
+                ? `Tên: ${data.name} | Tuổi: ${data.age}` 
+                : "Chưa có thông tin cá nhân";
+        };
+
+        const stored = localStorage.getItem('myProfile');
+        if (stored) showData(JSON.parse(stored));
+        else showData(null);
+
+        saveBtn.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            const age = ageInput.value;
+            if (name && age) {
+                const profile = { name, age: Number(age) };
+                localStorage.setItem('myProfile', JSON.stringify(profile));
+                showData(profile);
+                nameInput.value = '';
+                ageInput.value = '';
+            }
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            localStorage.removeItem('myProfile');
+            showData(null);
+        });
+    </script>
+</body>
+</html>
